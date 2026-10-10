@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>0→Shipped · Resume Parser</title>
+  <meta name="description" content="Upload a PDF resume and get an instant score: skills present, skills missing." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="nav">
+    <div class="brand">0<span class="arrow">→</span>Shipped</div>
+    <span class="badge">Resume Parser</span>
+  </header>
+
+  <main>
+    <section class="hero">
+      <h1>Score your resume <span class="gradient">in seconds</span></h1>
+      <p>
+        Drop a PDF and get an instant read: an overall score, the skills it found,
+        and the ones it's missing. Runs entirely in your browser — nothing is uploaded.
+      </p>
+    </section>
+
+    <section id="uploadSection">
+      <div class="upload-card card">
+        <div class="dropzone" id="dropzone" tabindex="0" role="button" aria-label="Upload resume PDF">
+          <div class="dz-icon">📄</div>
+          <p class="dz-title">Drag &amp; drop your resume here</p>
+          <p class="dz-sub">or <span class="link">browse files</span> · PDF only</p>
+          <input type="file" id="fileInput" accept="application/pdf,.pdf" hidden />
+        </div>
+        <button class="ghost-btn" id="sampleBtn" type="button">No PDF handy? Score a sample resume</button>
+        <p class="status" id="status" hidden></p>
+      </div>
+    </section>
+
+    <section class="results" id="results" hidden>
+      <div class="score-card card">
+        <h2>Resume score</h2>
+        <div class="gauge">
+          <svg viewBox="0 0 120 120" aria-hidden="true">
+            <circle class="gauge-bg" cx="60" cy="60" r="52" />
+            <circle class="gauge-fg" id="gaugeFg" cx="60" cy="60" r="52" />
+          </svg>
+          <div class="gauge-label">
+            <span id="scoreNum">0</span><span class="pct">%</span>
+          </div>
+        </div>
+        <p class="verdict" id="verdict"></p>
+        <ul class="stats">
+          <li><strong id="statPages">–</strong> pages parsed</li>
+          <li><strong id="statWords">–</strong> words read</li>
+          <li><strong id="statMatched">–</strong> skills found</li>
+        </ul>
+      </div>
+
+      <div class="skills-card card">
+        <div class="skill-group">
+          <h2><span class="dot dot-good"></span> Skills present <span class="count" id="presentCount"></span></h2>
+          <div class="chips" id="presentChips"></div>
+        </div>
+        <div class="skill-group">
+          <h2><span class="dot dot-miss"></span> Skills missing <span class="count" id="missingCount"></span></h2>
+          <div class="chips" id="missingChips"></div>
+        </div>
+        <button class="ghost-btn" id="resetBtn" type="button">← Parse another resume</button>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    Mock demo · PDF text is parsed locally with PDF.js · no backend, no uploads
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
